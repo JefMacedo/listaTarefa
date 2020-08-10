@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List _toDoList = [];
+  List _toDoList = ["Jeferson", "Abacaxi"];
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,8 @@ class _HomeState extends State<Home> {
       body: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.fromLTRB(17, 1, 7, 1),
-            child: Row(
-              children: <Widget>[
+              padding: EdgeInsets.fromLTRB(17, 1, 7, 1),
+              child: Row(children: <Widget>[
                 Expanded(
                     child: TextField(
                         decoration: InputDecoration(
@@ -44,9 +43,20 @@ class _HomeState extends State<Home> {
                   textColor: Colors.white,
                   onPressed: () {},
                 )
-              ],
-            ),
-          )
+              ])),
+          Expanded(
+              child: ListView.builder(
+                  padding: EdgeInsets.only(top: 10),
+                  itemCount: _toDoList.length,
+                  itemBuilder: (context, index) {
+                    return CheckboxListTile(
+                        title: Text(_toDoList[index]["title"]),
+                        value: _toDoList[index]["ok"],
+                        secondary: CircleAvatar(
+                            child: Icon(_toDoList[index]["ok"]
+                                ? Icons.check
+                                : Icons.error)));
+                  }))
         ],
       ),
     );
